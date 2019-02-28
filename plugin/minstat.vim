@@ -1,7 +1,6 @@
-" get the git branch 
+﻿" get the git branch 
 function! GitBranchName()
-  let l:brnch = substitute(system("git rev-parse --abbrev-ref HEAD 2>/dev/null"), '\n', '', '')
-  return strlen(l:brnch)>0?l:brnch:''
+  return fugitive#head(7)
 endfunction
 
 function! CurByteAsHex()
@@ -14,12 +13,7 @@ set statusline=
 " git branch name
 set statusline+=%#PmenuSel#
 set statusline+=\ 
-if has("gui_running")
-  set statusline+=
-else
-  " nicer looking for term vim
-  set statusline+=⛕
-endif
+set statusline+=⛕
 set statusline+=\ %{GitBranchName()}\ 
 
 " file path
